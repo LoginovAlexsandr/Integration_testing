@@ -1,0 +1,11 @@
+# Dockerfile для prodapp (порт 8081, prod профиль)
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+
+# Копируем собранный JAR
+COPY target/Authorization_service-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8081
+
+# Запуск с prod профилем
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "app.jar"]

@@ -1,0 +1,11 @@
+# Dockerfile для devapp (порт 8080, dev профиль)
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+
+# Копируем собранный JAR из target/
+COPY target/Authorization_service-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8080
+
+# Запуск с dev профилем (env из compose переопределит, если нужно)
+ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "app.jar"]
